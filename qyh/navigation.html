@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://my.chsi.com.cn/archive/wap/index.action -->
+<html data-dpr="1" style="font-size: 40px;">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit=cover">
+    <title>学信档案</title>
+    <link rel="icon" href="https://t1.chei.com.cn/archive/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./navigation_files/app.css">
+    <link rel="stylesheet" href="./navigation_files/iconfont.css">
+    <script type="text/javascript" async="" src="./navigation_files/analytics.js.下载"></script>
+    <script type="text/javascript" id="zhuge-js" async="" src="./navigation_files/zhuge.js.下载"></script>
+    <script type="text/javascript" src="./navigation_files/zhuge-1.0.0.js.下载"></script>
+
+    <script async="" src="./navigation_files/js"></script>
+    <script>
+        // 放在ga.jsp 中
+        function gaTrackerOutboundLink(ele, eventCategory, eventAction, eventLabel) {
+            gtag('event', eventAction, {
+                'event_category': eventCategory,
+                'event_label': eventLabel
+            });
+            return true;
+        }
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-100524-5', {
+            'sample_rate': 1
+        });
+
+        // 诸葛统计代码
+        var zhugeFun = {
+            init: function (flag) {
+                var OpenautoTrack = typeof flag != 'undefined' ? flag : false; //是否开启全埋点
+                if (!flag) {
+                    var _url = window.location.href;
+                    if (_url.indexOf('/archive/index') > -1 || _url.indexOf('archive/wap/index') > -
+                        1) { //pc、wap首页
+                        OpenautoTrack = true;
+                    }
+                }
+                window.zhuge.load('0d76434d9bb94abfaa16e1d5a3d82b52', { //配置应用的AppKey
+                    autoTrack: OpenautoTrack
+                });
+            },
+            votePv: function (name, from, type) {
+                // 问卷浏览量
+                // name string  问卷名称
+                // from string 来源
+                // type string 类型，就业还是学职
+                zhuge.track('浏览问卷', {
+                    '问卷名称': name,
+                    '访问来源': from,
+                    '问卷类型': type
+                });
+            },
+            voteClick: function (name, from, type) {
+                // 问卷点击量
+                // name string  问卷名称
+                // from string 来源
+                // type string 类型，就业还是学职
+                zhuge.track('点击问卷', {
+                    '问卷名称': name,
+                    '访问来源': from,
+                    '问卷类型': type
+                });
+            },
+            voteSubmit: function (name, from, type, time) {
+                // 问卷提交量
+                // name string  问卷名称
+                // from string 来源
+                // type string 类型，就业还是学职
+                // time num 完成问卷用时
+                zhuge.track('提交问卷', {
+                    '问卷名称': name,
+                    '访问来源': from,
+                    '问卷类型': type,
+                    '问卷用时': time
+                });
+            },
+            voteClickSubmit: function (name, from, type) {
+                // 问卷前台校验通过，还未传后台前的提交量
+                // name string  问卷名称
+                // from string 来源
+                // type string 类型，就业还是学职
+                zhuge.track('点提交按钮', {
+                    '问卷名称': name,
+                    '访问来源': from,
+                    '问卷类型': type
+                });
+            },
+            //去往新职业
+            goNcss: function (from, to) {
+                zhuge.track('点击新职业', {
+                    '来源': from,
+                    '去向': to
+                });
+            },
+            //去往学职
+            goXz: function (from, to) {
+                zhuge.track('点击学职', {
+                    '来源': from,
+                    '去向': to
+                });
+            },
+            pagePv: function (name, platform, hasData) { //各类页面访问量
+                if (typeof hasData != 'undefined') {
+                    zhuge.track('主要页面访问量', {
+                        '名称': name,
+                        '设备信息': platform,
+                        '是否有数据': hasData
+                    });
+                } else {
+                    zhuge.track('主要页面访问量', {
+                        '名称': name,
+                        '设备信息': platform
+                    });
+                }
+            },
+            gdjyToZxyz: function (type, platform) { //从高等教育点击到在线验证
+                zhuge.track('从高等教育点击到在线验证', {
+                    '类型': type,
+                    '设备信息': platform
+                });
+            },
+            xjxlMydClick: function (type) { //学籍学历右侧的满意度推荐按钮点击情况
+                zhuge.track('从高等教育点击满意度', {
+                    '类型': type
+                });
+            },
+            byqxClick: function (platform) { //毕业去向提交成功
+                zhuge.track('毕业去向提交成功', {
+                    '设备信息': platform
+                });
+            },
+            zxysSqClick: function (type) { //在线验证点击申请
+                zhuge.track('申请在线验证报告', {
+                    '类型': type //学籍、学历
+                });
+            },
+            gjhzSendStep: function (step) { //国际合作的发送报告流程
+                switch (step) {
+                    case '1':
+                        zhuge.track('国际合作发送报告-选择机构和大学');
+                        break;
+                    case '2':
+                        zhuge.track('国际合作发送报告-选择报告');
+                        break;
+                    case '3':
+                        zhuge.track('国际合作发送报告-确认报告');
+                        break;
+                    case '4':
+                        zhuge.track('国际合作发送报告-点击发送');
+                        break;
+                }
+            },
+            dctpIndexClick: function (name, platform) {
+                zhuge.track('调查投票首页点击事件', {
+                    '点击区域': name, //学籍、学历
+                    '设备信息': platform
+                });
+            }
+        }
+    </script>
+</head>
+
+<body style="font-size: 12px;">
+    <div id="app" class="my-container"><img src="./navigation_files/share_xxda.jpg" width="0" height="0"
+            style="position: absolute; top: -100px; left: 0px;">
+        <div class="my-header"><a href="https://my.chsi.com.cn/archive/wap/index.jsp" class="logo"></a> 
+            <!-- <a onclick="logoutFn(event);" id="goOut" href="https://account.chsi.com.cn/passport/logout?service=https://my.chsi.com.cn/archive/index.jsp" class="go-out"><i title="退出" class="iconfont"></i></a> -->
+        </div>
+        <div class="vote-part"><a
+                href="https://my.chsi.com.cn/archive/survey/cyfw/display.action?id=k8nt3n6orjkehkim&amp;from=main-wap"
+                id="vote_wap" class="vote-jy-part jycy-vote" style="display: block;">
+                <div class="go-ahead undefined">
+                    <h4 id="vote_tit">高校就业创业服务调查</h4>
+                </div>
+            </a> <a href="https://xz.chsi.com.cn/cp/wap/cover.do?surveyId=dgc9995yt3v3tv2f&amp;from="
+                onmousedown="zhugeFun.goXz(&#39;wapIndexBanner&#39;,&#39;xzZycp&#39;)" target="_blank">
+                <div class="card-list van-row">
+                    <div class="van-col van-col--4"><span class="card-left-a"><img src="./navigation_files/cyqx.jpg"
+                                width="50"></span></div>
+                    <div class="card-list-desc van-col van-col--14">
+                        <h4 class="show-line2">创业倾向测试</h4>
+                    </div>
+                    <div class="card-list-link van-col van-col--6">
+                        参与测评></div>
+                </div>
+            </a> <a href="https://job.ncss.cn/student/jobs/index.html"
+                onmousedown="zhugeFun.goNcss(&#39;wapIndexBanner&#39;,&#39;ncssindex&#39;);" target="_blank">
+                <div class="card-list van-row">
+                    <div class="van-col van-col--4"><span class="card-left-a"><img
+                                src="./navigation_files/zz1pusw8v5seq12s.png" class="border-radius-yj"></span></div>
+                    <div class="card-list-desc van-col van-col--14">
+                        <h4 class="show-line1">审计人员、审计助理</h4> <span class="xzy-xz">6k-8k</span> <span
+                            class="xzy-xl">本科及以上</span>
+                    </div>
+                    <div class="card-list-link van-col van-col--6">
+                        更多职位</div>
+                </div>
+            </a>
+            <div class="card-list vote-myd van-row">
+                <div class="vote-myd-tit">
+                    院校满意度<span class="sub-tit">江西财经大学现代经济管理学院-会计学(注册会计师方向)</span></div>
+                <div class="tCenter myd-center van-row">
+                    <div class="van-col van-col--8"><span class="myd-fs">4.2</span><br> <span class="myd-text">综合</span>
+                    </div>
+                    <div class="van-col van-col--8"><span class="myd-fs">4.1</span><br> <span class="myd-text">环境</span>
+                    </div>
+                    <div class="van-col van-col--8"><span class="myd-fs">4</span><br> <span class="myd-text">生活</span>
+                    </div>
+                </div>
+                <div class="myd-bottom van-row">
+                    <div class="van-col van-col--16">
+                        累计投票<span class="myd-totle">3097</span></div>
+                    <div class="van-col van-col--8"><a
+                            href="https://my.chsi.com.cn/zyzsk/wap/yxmyd/schappraisal"><button
+                                class="van-button van-button--default van-button--normal van-button--round"><span
+                                    class="van-button__text">我要评价</span></button></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-part">
+            <div class="van-row">
+                <div class="van-col van-col--8"><a href="../qyh.html"
+                        class="menu-a"><span class="menu-img xjxl-img"></span><br>
+                        高等教育信息
+                    </a></div>
+                <div class="van-col van-col--8"><a href="https://my.chsi.com.cn/archive/bab/index.action"
+                        class="menu-a"><span class="menu-img zxyz-img"></span><br>
+                        在线验证报告
+                    </a></div>
+                <div class="van-col van-col--8"><a href="https://my.chsi.com.cn/archive/rzbg/index.action"
+                        class="menu-a"><span class="menu-img rzbg-img"></span><br>
+                        学历认证与成<br>绩验证
+                    </a></div>
+            </div>
+            <div class="van-row">
+                <div class="van-col van-col--8"><a href="https://my.chsi.com.cn/archive/gjhz/index.action"
+                        class="menu-a"><span class="menu-img gjhz-img"></span><br>
+                        留学报告传输
+                    </a></div>
+                <div class="van-col van-col--8"><a href="https://my.chsi.com.cn/archive/wap/gdjy/xj/collate.action"
+                        class="menu-a"><span class="menu-img txjd-img"></span><br>
+                        毕业证书图像<br>校对
+                    </a></div>
+                <div class="van-col van-col--8"><a href="https://www.ncss.cn/"
+                        onmousedown="zhugeFun.goNcss(&#39;wapIndexMenu&#39;,&#39;ncssindex&#39;);" class="menu-a"><span
+                            class="menu-img xzy-img"></span><br>
+                        就业
+                    </a></div>
+            </div>
+            <div class="van-row">
+                <div class="van-col van-col--8"><a href="https://my.chsi.com.cn/archive/survey/index.action"
+                        class="menu-a"><span class="menu-img myd-img"></span><br>
+                        学校满意度
+                    </a></div>
+                <div class="van-col van-col--8"><a href="http://xz.chsi.com.cn/survey/wap/index.action"
+                        onmousedown="zhugeFun.goXz(&#39;wapIndexMenu&#39;,&#39;xzZycp&#39;)" class="menu-a"><span
+                            class="menu-img cp-img"></span><br>
+                        个人测评
+                    </a></div>
+                <div class="van-col van-col--8"><a href="https://my.chsi.com.cn/archive/wap/auth/show.action"
+                        class="menu-a sq-num">
+                        <!----> <span class="menu-img auth-img"></span><br>
+                        信息核查确认
+                    </a></div>
+            </div>
+        </div>
+        <!-- <div class="van-hairline--top-bottom van-tabbar van-tabbar--fixed" style="z-index: 1000;">
+            <div class="van-tabbar-item van-tabbar-item--active">
+                <div class="van-tabbar-item__icon"><i title="home" class="iconfont"></i>
+                  
+                </div>
+                <div class="van-tabbar-item__text"> <span>首页</span></div>
+            </div>
+            <div class="van-tabbar-item">
+                <div class="van-tabbar-item__icon"><i title="xjxl" class="iconfont"></i>
+                    
+                </div>
+                <div class="van-tabbar-item__text"> <span>学籍学历</span></div>
+            </div>
+            <div class="van-tabbar-item">
+                <div class="van-tabbar-item__icon"><i title="cp" class="iconfont"></i>
+                    
+                </div>
+                <div class="van-tabbar-item__text"> <span>个人测评</span></div>
+            </div>
+            <div class="van-tabbar-item">
+                <div class="van-tabbar-item__icon"><i title="zp" class="iconfont"></i>
+                   
+                </div>
+                <div class="van-tabbar-item__text"> <span>求职招聘</span></div>
+            </div>
+            <div class="van-tabbar-item">
+                <div class="van-tabbar-item__icon"><i title="my" class="iconfont"></i>
+                    
+                </div>
+                <div class="van-tabbar-item__text"> <span>我的</span></div>
+            </div>
+        </div> -->
+    </div>
+    <script src="./navigation_files/vue.min.js.下载"></script>
+    <script src="./navigation_files/vendors.js.下载"></script>
+    <script src="./navigation_files/app.js.下载"></script>
+    <script src="./navigation_files/lodash.min.js.下载"></script>
+    <script src="./navigation_files/jweixin-1.2.0.js.下载"></script>
+    <script>
+        var myVue = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    activeBottom: 0,
+                    topText: '学信档案' //标题文字
+                }
+            },
+            mixins: typeof mixin != 'undefined' ? [mixin] : {},
+            created: function () {
+                zhugeFun.init();
+                var identityTag = 'e7dd72f586e3f685bcf700e9eef5008f';
+                if (identityTag != 'Anonymous') {
+                    zhuge.identify(identityTag);
+                }
+            },
+            methods: {
+                onClickLeft: function () { //左上的返回按钮
+                    history.back(-1);
+                },
+                goToIndex: function () {
+                    window.location.href = 'https://my.chsi.com.cn/archive/wap/index.action';
+                },
+                getQueryString: function (name) { //获取地址栏参数
+                    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) {
+                        return unescape(r[2]);
+                    }
+                    return null;
+                },
+                VoteGoToIndex: function () { //投票完成返回首页
+                    var _from = this.getQueryString('from');
+                    if (_from == 'archive-dctp-wap') {
+                        window.location.href = 'https://my.chsi.com.cn/archive/survey/index.action';
+                    } else {
+                        window.location.href = 'https://my.chsi.com.cn/archive/wap/index.action';
+                    }
+                },
+                addCookie: function (name, value) { //设置cookie
+                    var cookieString = name + "=" + escape(value);
+                    document.cookie = cookieString;
+                    document.cookie.setSecure = true; //只允许在https环境下使用cookie
+                },
+                getCookie: function (name) {
+                    var strCookie = document.cookie;
+                    var arrCookie = strCookie.split("; ");
+                    for (var i = 0; i < arrCookie.length; i++) {
+                        var arr = arrCookie[i].split("=");
+                        if (arr[0] == name) return arr[1];
+                    }
+                    return "";
+                },
+                trimSpace: function (s) { //去掉左右空格
+                    return s.replace(/(^\s*)|(\s*$)/g, "");
+                }
+            }
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        //解决手机浏览器自带返回 没刷新问题
+        (function () {
+            var isPageHide = false;
+            window.addEventListener('pageshow', function () {
+                if (isPageHide) {
+                    var curUrl = window.location.href,
+                        curIndex = curUrl.substring(curUrl.indexOf('wap/') + 4);
+                    if (curIndex == 'my.jsp') {
+                        myVue.$data.activeBottom = 4;
+                    } else {
+                        myVue.$data.activeBottom = 0;
+                    }
+                }
+            });
+            window.addEventListener('pagehide', function () {
+                isPageHide = true;
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
